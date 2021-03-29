@@ -1,16 +1,17 @@
 import React from "react"
+import classNames from 'classnames'
 
-const PizzaBlock = (props) => {
+const PizzaBlock = ({name, imgUrl, price, types}) => {
     return (
         <div className="pizza-block">
             <img className="pizza-block__image"
-                src="https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg"
+                src={imgUrl}
                 alt="Pizza" />
-            <h4 className="pizza-block__title">Чизбургер-пицца</h4>
+            <h4 className="pizza-block__title">{name}</h4>
             <div className="pizza-block__selector">
                 <ul>
-                    <li className="active">тонкое</li>
-                    <li>традиционное</li>
+                    <li className={classNames({'disabled': types[0] !== 0})} >тонкое</li>
+                    <li className={classNames({'disabled': types[1] !== 1})}>традиционное</li>
                 </ul>
                 <ul>
                     <li className="active">26 см.</li>
@@ -19,7 +20,7 @@ const PizzaBlock = (props) => {
                 </ul>
             </div>
             <div className="pizza-block__bottom">
-                <div className="pizza-block__price">от 395 ₽</div>
+                <div className="pizza-block__price">от {price} ₽</div>
                 <div className="button button--outline button--add">
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
