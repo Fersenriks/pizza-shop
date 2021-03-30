@@ -1,7 +1,23 @@
 import React from "react"
 import classNames from 'classnames'
 
-const PizzaBlock = ({name, imgUrl, price, types}) => {
+const PizzaBlock = ({name, imgUrl, price, types, sizes}) => {
+    const [activeType, setActiveType] = React.useState(types[0])
+    const [activeSize, setActiveSize] = React.useState(types[0])
+
+    const selectType = ['тонкое', 'традиционное'];
+    const selectSize = [26, 30, 40];
+
+    const onSelectType = (index) => {
+        setActiveType(index)
+    }
+
+    const onSelectSize= (index) => {
+        setActiveSize(index)
+    }
+
+    console.log('types', types)
+
     return (
         <div className="pizza-block">
             <img className="pizza-block__image"
@@ -10,13 +26,36 @@ const PizzaBlock = ({name, imgUrl, price, types}) => {
             <h4 className="pizza-block__title">{name}</h4>
             <div className="pizza-block__selector">
                 <ul>
-                    <li className={classNames({'disabled': types[0] !== 0})} >тонкое</li>
-                    <li className={classNames({'disabled': types[1] !== 1})}>традиционное</li>
+                    {
+                        selectType.map((type, index) =>
+                            <li
+                                onClick={() => onSelectType(index)}
+                                key={index}
+                                className={classNames(
+                                    {
+                                        active: activeType === index,
+                                        disabled: !types.includes(index)
+                                    }
+                                )}>
+                                {type}
+                            </li>)
+                    }
                 </ul>
                 <ul>
-                    <li className="active">26 см.</li>
-                    <li>30 см.</li>
-                    <li>40 см.</li>
+                {
+                        selectSize.map((size, index) =>
+                            <li
+                                onClick={() => onSelectSize(index)}
+                                key={index}
+                                className={classNames(
+                                    {
+                                        active: activeSize === index,
+                                        disabled: !sizes.includes(size)
+                                    }
+                                )}>
+                                {size} см.
+                            </li>)
+                    }
                 </ul>
             </div>
             <div className="pizza-block__bottom">

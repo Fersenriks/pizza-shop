@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import axios from 'axios'
 import { Sort, Categories, PizzaBlock } from '../components'
 
-const Home = (props) => {
+const Home = () => {
     const [getPizzas, setGetPizzas] = React.useState(null);
 
     useEffect(() => {
@@ -27,10 +27,12 @@ const Home = (props) => {
                 {
                     getPizzas && getPizzas.map(
                         pizzaItem => <PizzaBlock
+                            key={pizzaItem.id}
                             name={pizzaItem.name}
                             imgUrl = {pizzaItem.imageUrl}
                             price={pizzaItem.price}
                             types={pizzaItem.types}
+                            sizes={pizzaItem.sizes}
                         />)
                 }
             </div>
