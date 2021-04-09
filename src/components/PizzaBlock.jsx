@@ -17,8 +17,6 @@ const PizzaBlock = ({name, imgUrl, price, types, sizes}) => {
         setActiveSize(size)
     }
 
-    console.log('types', types)
-
     return (
         <div className="pizza-block">
             <img className="pizza-block__image"

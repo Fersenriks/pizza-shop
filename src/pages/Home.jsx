@@ -1,16 +1,17 @@
-import React, { useEffect } from "react"
-import axios from 'axios'
+import React from 'react';
+import { useSelector } from 'react-redux';
+
 import { Sort, Categories, PizzaBlock } from '../components'
 
 const Home = () => {
-    const [getPizzas, setGetPizzas] = React.useState(null);
 
-    useEffect(() => {
-        axios.get('http://localhost:3001/pizzas')
-            .then(request => setGetPizzas(request.data))
-    }, [])
+    
 
-    console.log(getPizzas)
+    const getPizzas = useSelector(({ pizzas }) => {
+        return pizzas.items;
+    });
+
+    
 
     return (
         <div className="container">
@@ -19,7 +20,11 @@ const Home = () => {
                     items={['Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые']}
                 />
                 <Sort
-                    items={['популярности', 'цене', 'алфавиту']}
+                    items={[
+                        { name: 'популярности', type: 'popular' },
+                        { name: 'цене', type: 'price' },
+                        { name: 'алфавиту', type: 'alphabet' },
+                    ]}
                 />
             </div>
             <h2 className="content__title">Все пиццы</h2>
@@ -29,15 +34,16 @@ const Home = () => {
                         pizzaItem => <PizzaBlock
                             key={pizzaItem.id}
                             name={pizzaItem.name}
-                            imgUrl = {pizzaItem.imageUrl}
+                            imgUrl={pizzaItem.imageUrl}
                             price={pizzaItem.price}
                             types={pizzaItem.types}
                             sizes={pizzaItem.sizes}
-                        />)
+                        />
+                    )
                 }
             </div>
         </div>
     )
 }
 
-export default Home
+export default Home;

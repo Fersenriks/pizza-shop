@@ -34,7 +34,7 @@ const Sort = ({ items }) => {
                         fill="#2C2C2C" />
                 </svg>
                 <b>Сортировка по:</b>
-                <span>{items[activeItem]}</span>
+                <span>{items[activeItem].name}</span>
             </div>
             {
                 visibleSort &&
@@ -46,7 +46,7 @@ const Sort = ({ items }) => {
                                     className={activeItem === index ? 'active' : ''}
                                     onClick={() => onActiveItem(index)}
                                     key={index}>
-                                    {item}
+                                    {item.name}
                                 </li>
                             )
                         }
